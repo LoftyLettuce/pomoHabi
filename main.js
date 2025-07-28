@@ -1,14 +1,14 @@
 /// <reference types="chrome" />
 function timer(goal, s){
+  let countDownUI = document.querySelector('div');
+  s = s-1;
+  secondLeft = dateFns.differenceInSeconds(goal, new Date())
+  const clock = {
+    minute: `${Math.floor(secondLeft/60)}`.padStart(2, '0'),
+    second: `${secondLeft%60}`.padStart(2, '0')
+  };
+  countDownUI.textContent = `${clock.minute} : ${clock.second}`;
   setTimeout(()=>{
-    let countDownUI = document.querySelector('div');
-    s = s-1;
-    secondLeft = dateFns.differenceInSeconds(goal, new Date())
-    const clock = {
-      minute: `${Math.floor(secondLeft/60)}`.padStart(2, '0'),
-      second: `${secondLeft%60}`.padStart(2, '0')
-    };
-    countDownUI.textContent = `${clock.minute} : ${clock.second}`;
     if (s != 0){
       timer(goal, s);
     }
@@ -44,11 +44,18 @@ async function showTime(session){
   }
 }
 window.addEventListener('load', async ()=>{
-  const session = 20;
-  showTime(session*60);
+  chrome.storage.local.get('Session', (result)=>{
+    if ('Session' in result){
+      const session = JSON.parse(result.Session);
+      showTime(session*60);
+    }
+  })
   document.querySelector('button').addEventListener('click', (e)=>{
+    const session = Number(document.querySelector('input').value);
+    console.log(session);
     e.target.disabled = true;
-    const goal = dateFns.addMinutes(new Date(), session)
+    const goal = dateFns.addMinutes(new Date(), session);
+    chrome.storage.local.set({'Session': session});
     chrome.storage.local.set({'Time': JSON.stringify(goal)});
     timer(goal, 60*session);
     chrome.runtime.sendMessage({'time': session});

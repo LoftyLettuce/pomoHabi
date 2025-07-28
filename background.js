@@ -38,9 +38,21 @@ async function connectTask(){
 }
 async function connectList(){
   chrome.storage.local.get('Task', async (result)=>{
-    const task = JSON.parse(result.Task);
-    let checkList = await fetchItems(task.daily);
+    const tasks = JSON.parse(result.Task);
+    let checkList = await fetchItems(tasks.daily);
     chrome.storage.local.set({'CheckList': JSON.stringify(checkList)})
+    switch (checkList.length) {
+      case 0:
+        checkTask(tasks.habit);
+        break;
+      case 1:
+        checkItem(tasks.daily, checkList[0]);
+        checkTask(tasks.daily);
+        break;
+      default:
+        checkItem(tasks.daily, checkList[0]);
+        break;
+    }
   })
 }
 function checkItem(taskId, itemId){
@@ -78,25 +90,7 @@ chrome.alarms.onAlarm.addListener(async ()=>{
     message: "Well, create another cycle I guest",
     priority: 2,
   });
-  chrome.storage.local.remove('Time');
+  chrome.storage.local.remove(['Time', 'Session']);
   await connectTask();
-  await connectList();
-  chrome.storage.local.get(['CheckList', 'Task'], async (result)=>{
-    if ('CheckList' in result && 'Task' in result){
-      const tasks = JSON.parse(result.Task);
-      const checkList = JSON.parse(result.CheckList);
-      switch (checkList.length) {
-        case 0:
-          checkTask(tasks.habit);
-          break;
-        case 1:
-          checkItem(tasks.daily, checkList[0]);
-          checkTask(tasks.daily);
-          break;
-        default:
-          checkItem(tasks.daily, checkList[0]);
-          break;
-      }
-    }
-  })
+  connectList();
 })

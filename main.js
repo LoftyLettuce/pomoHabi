@@ -46,6 +46,7 @@ async function showTime(session){
 window.addEventListener('load', async ()=>{
   chrome.storage.local.get('Session', (result)=>{
     if ('Session' in result){
+      document.querySelector('input').className = 'hide';
       const session = JSON.parse(result.Session);
       showTime(session*60);
     }

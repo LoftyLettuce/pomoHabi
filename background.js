@@ -12,7 +12,7 @@ async function fetchItems(id){
   return task.data.checklist.filter((val)=>!val.completed).map((val)=>val.id);
 }
 async function connectTask(){
-  chrome.storage.local.get('Task', (result)=>{
+  browser.storage.local.get('Task', (result)=>{
     if (!('Task' in result)){
       fetch(`https://habitica.com/api/v3/tasks/user`, {
         method: 'GET', 
@@ -30,17 +30,17 @@ async function connectTask(){
           pomodoData.forEach((val) => {
             infoObject[val.type] = val.id;
           });
-          chrome.storage.local.set({'Task': JSON.stringify(infoObject)});
+          await browser.storage.local.set({'Task': JSON.stringify(infoObject)});
         })
       .catch((error)=>console.log(error));
     }
   })
 }
 async function connectList(){
-  chrome.storage.local.get('Task', async (result)=>{
+  browser.storage.local.get('Task', async (result)=>{
     const tasks = JSON.parse(result.Task);
     let checkList = await fetchItems(tasks.daily);
-    chrome.storage.local.set({'CheckList': JSON.stringify(checkList)})
+    browser.storage.local.set({'CheckList': JSON.stringify(checkList)})
     switch (checkList.length) {
       case 0:
         checkTask(tasks.habit);
@@ -77,20 +77,20 @@ function checkTask(taskId){
       },
     })
 }
-chrome.runtime.onMessage.addListener((message)=>{
-  chrome.alarms.create("countdownTimer", {
+browser.runtime.onMessage.addListener((message)=>{
+  browser.alarms.create("countdownTimer", {
     delayInMinutes: message.time,
   })
 })
-chrome.alarms.onAlarm.addListener(async ()=>{
-  chrome.notifications.create({
+browser.alarms.onAlarm.addListener(async ()=>{
+  browser.notifications.create({
     type: "basic",
     iconUrl: "48-icon.png",
     title: "Timer done!",
     message: "Well, create another cycle I guest",
     priority: 2,
   });
-  chrome.storage.local.remove(['Time', 'Session']);
+  browser.storage.local.remove(['Time', 'Session']);
   await connectTask();
   connectList();
 })

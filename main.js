@@ -15,7 +15,7 @@ function timer(goal, s){
   }, 1000);
 }
 async function checkTimer(session){
-  const result = await chrome.storage.local.get('Time');
+  const result = await browser.storage.local.get('Time');
   if ('Time' in result){
     const savedTime = dateFns.parseJSON(result.Time);
     const now = new Date();
@@ -40,11 +40,12 @@ async function showTime(session){
     timer(result.goal, result.timeLeft);
   }
   else{
+    browser.storage.local.remove(['Time', 'Session']);
     btn.disabled = false;
   }
 }
 window.addEventListener('load', async ()=>{
-  chrome.storage.local.get('Session', (result)=>{
+  browser.storage.local.get('Session', (result)=>{
     if ('Session' in result){
       document.querySelector('input').className = 'hide';
       const session = JSON.parse(result.Session);
@@ -56,9 +57,9 @@ window.addEventListener('load', async ()=>{
     console.log(session);
     e.target.disabled = true;
     const goal = dateFns.addMinutes(new Date(), session);
-    chrome.storage.local.set({'Session': session});
-    chrome.storage.local.set({'Time': JSON.stringify(goal)});
+    browser.storage.local.set({'Session': session});
+    browser.storage.local.set({'Time': JSON.stringify(goal)});
     timer(goal, 60*session);
-    chrome.runtime.sendMessage({'time': session});
+    browser.runtime.sendMessage({'time': session});
   });
 })

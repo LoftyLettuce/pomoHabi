@@ -4,13 +4,26 @@
   <meta charset="UTF-8">
   <script src="main.js"></script>
   <script src="date-fns-bundled.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@catppuccin/palette/css/catppuccin.css">
   <link rel="stylesheet" href="styles.css">
   <title>Testing</title>
 </head>
 <body>
-  <div></div>
-  <label for="clock"><input type="number" value="30" id="clock"></label>
-  <button>start</button>
-  <div class="console"></div>
+  <div class="pomodo-timer">
+    <div class="time">30:00</div>
+    <div class = "hide note-wrapper">
+      <label for="note"><input type="text" id = "note">Notes: </label>
+      <button class="add-button">+</button>
+    </div>
+    <div class="number-input-wrapper">
+      <label for="clock">Minute: <input type="number" value="30" id="clock"></label>
+      <button class="spinner-button" id="decrement">-</button>
+      <button class="spinner-button" id="increment">+</button>
+    </div>
+    <div class="control">
+      <button class="start-button">start</button>
+      <button class="reset-button" disabled="true">reset</button>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,3 +1,58 @@
 .hide{
-  display: none;
+  visibility: hidden;
+}
+*{
+  padding: 0;
+  margin: 0;
+}
+body{
+  font-size: 20px;
+  min-height: 200px;
+  min-width: 300px;
+  width: 20vw;
+}
+.pomodo-timer{
+  min-height: 200px;
+  background-color: var(--ctp-mocha-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-family: 'Roboto', sans-serif;
+  color: var(--ctp-mocha-text);
+  padding: 10px;
+}
+.time{
+  font-size: 4rem;
+}
+input{
+  background-color: var(--ctp-mocha-base);
+  color: var(--ctp-mocha-text);
+  border: 1px solid var(--ctp-mocha-mauve);
+  padding: 0.2rem 0.5rem;
+  width: 3rem;
+}
+/* Hide default spinner */
+input[type="number"] {
+  -moz-appearance: textfield;  /* Firefox */
+  -webkit-appearance: none;    /* Chrome, Safari */
+  appearance: none;            /* Standard syntax */
+}
+
+/* Custom spinner buttons */
+.spinner-button {
+  cursor: pointer;
+  background-color: var(--ctp-mocha-mauve);
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+}
+
+.spinner-button:active {
+  background-color: var(--ctp-mocha-lavender);
+}
+.start-button{
+  background-color: var(--ctp-mocha-green);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  border: none;
 }

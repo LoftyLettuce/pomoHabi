@@ -7,6 +7,9 @@ browser.runtime.onMessage.addListener((message)=>{
   else if ('note' in message){
     HabiticaAPI.setTask(message.note);
   }
+  else if ('getGold' in message){
+    HabiticaAPI.getReward();
+  }
 })
 browser.alarms.onAlarm.addListener(async ()=>{
   browser.notifications.create({
@@ -58,7 +61,7 @@ const HabiticaAPI = ((userAPI, keyAPI)=>{
   }
   async function getPomodoroTasks(){
     const tasks = await errorHandling('getPomodoroTasks', 'https://habitica.com/api/v3/tasks/user', getMethod);
-    const pomodoData = tasks.data.filter((task)=>(task.text=='Overflow'||task.text=='Study'));
+    const pomodoData = tasks.data.filter((task)=>(task.text=='Overflow'||task.text=='Study'||task.type=='reward'));
     const infoObject = pomodoData.reduce((obj, {id, type, checklist})=>{
       obj[type] = {};
       obj[type]['id'] = id;
@@ -68,6 +71,11 @@ const HabiticaAPI = ((userAPI, keyAPI)=>{
       return obj;
     }, {});
     return JSON.stringify(infoObject);
+  }
+  async function getReward(){
+    const tasks = await errorHandling('getReward', 'https://habitica.com/api/v3/tasks/user', getMethod);
+    const rewards = tasks.data.filter((task)=>task.type=='reward');
+    console.log(rewards, tasks);
   }
   async function scoreItem({type, taskId, itemId}){
     switch (type){
@@ -99,7 +107,8 @@ const HabiticaAPI = ((userAPI, keyAPI)=>{
       })
     })
   }
-  return {getPomodoroTasks, scoreItem, setTask};
+
+  return {getPomodoroTasks, scoreItem, setTask, getReward};
 })('7a9a0dee-b79b-4596-8a77-99ca5efe983c', '9b26b414-1935-4d08-af35-827cfe93bf89');
 async function updateHabiticaItems(){
   const tasks = await HabiticaAPI.getPomodoroTasks();

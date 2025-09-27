@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "An extension so I don't have to check the checklist every damn time",
   "icons": {
-    "48": "48-icon.png",
-    "128":"128-icon.png"
+    "48": "/assets/48-icon.png",
+    "128":"/assets/128-icon.png"
   },
   "browser_action": {
     "default_title": "Pomodoro Timer",

@@ -6,21 +6,46 @@
   margin: 0;
 }
 body{
+  font-family: 'Roboto', sans-serif;
   font-size: 20px;
-  min-height: 200px;
-  min-width: 300px;
-  width: 20vw;
+  height: 280px;
+  width: 300px;
 }
+/* navigate board */
+.navigate-board{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: stretch;
+}
+.navigate-board .active{
+  border-bottom: 2px solid var(--ctp-mocha-green);
+}
+.navigate-board button:first-child{
+  border-right: 2px solid var(--ctp-mocha-mauve);
+}
+.navigate-board button{
+  border: none;
+  padding: 0.5rem;
+  color: var(--ctp-mocha-text);
+  background-color: var(--ctp-mocha-base);
+  border-bottom: 2px solid var(--ctp-mocha-mauve);
+}
+/* pomodo timer */
 .pomodo-timer{
-  min-height: 200px;
   background-color: var(--ctp-mocha-base);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  font-family: 'Roboto', sans-serif;
   color: var(--ctp-mocha-text);
-  padding: 10px;
+  padding: 0.5em;
+  height: 100%;
+}
+.pomodo-timer *{
+  font-size: 1.5rem;
+}
+.pomodo-timer button{
+  margin: 0.3rem;
 }
 .time{
   font-size: 4rem;
@@ -45,14 +70,124 @@ input[type="number"] {
   background-color: var(--ctp-mocha-mauve);
   padding: 0.2rem 0.5rem;
   border-radius: 5px;
+  border: none;
 }
 
 .spinner-button:active {
   background-color: var(--ctp-mocha-lavender);
 }
-.start-button{
+.start-button, .reset-button{
   background-color: var(--ctp-mocha-green);
   border-radius: 10px;
   padding: 0.5rem 1rem;
   border: none;
+}
+/* reward shop */
+.reward-shop{
+  background-color: var(--ctp-mocha-base);
+  overflow: scroll;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: end;
+  font-family: 'Roboto', sans-serif;
+  padding: 0.5em;
+}
+.reward-shop *{
+  font-size: 1rem;
+}
+.coin.gp{
+  align-self: end;
+}
+.items{
+  display: grid;
+  list-style: none;
+  align-content: stretch;
+  justify-content: stretch;
+  align-self: stretch;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: fit-content(100px);
+  gap: 0.5rem;
+}
+.reward-shop button{
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: var(--ctp-mocha-subtext);
+  border: 1px solid var(--ctp-mocha-mauve);
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: minmax(fit-content, 1fr);
+  justify-items: stretch;
+}
+.coin, .name{
+  pointer-events: none;
+}
+.coin {
+  color: var(--ctp-mocha-yellow);
+  position: relative;
+  justify-self: end;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+.coin::after{
+  content: '';
+  display: inline-block;
+  height: 1.2em;
+  width: 1.2em;
+  background-image: url(/assets/Gold.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.name{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  color: var(--ctp-mocha-text);
+  height: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box
+}
+/* effect */
+/* Sweep To Right */
+.hvr-sweep-to-right>.name {
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+.hvr-sweep-to-right>.name:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ctp-mocha-mauve);
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-sweep-to-right:hover>.name, .hvr-sweep-to-right:focus>.name, .hvr-sweep-to-right:active>.name {
+  color: var(--ctp-mocha-crust);
+}
+.hvr-sweep-to-right:hover>.name:before, .hvr-sweep-to-right:focus>.name:before, .hvr-sweep-to-right:active>.name:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }

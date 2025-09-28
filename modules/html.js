@@ -3,6 +3,7 @@ const html = (()=>{
     // Create the main container div
     const pomodoTimer = document.createElement('div');
     pomodoTimer.classList.add('pomodo-timer');
+    pomodoTimer.classList.add('content');
 
     // Create the time display
     const timeDisplay = document.createElement('div');
@@ -26,7 +27,7 @@ const html = (()=>{
     // Create the add button for note
     const addButton = document.createElement('button');
     addButton.classList.add('add-button');
-    addButton.textContent = '+';
+    addButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21 10V9l-6-6H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h6v-1.87l8.39-8.39c.44-.44 1-.68 1.61-.74m-7-5.5l5.5 5.5H14zm8.85 9.69l-.98.98l-2.04-2.04l.98-.98c.19-.2.52-.2.72 0l1.32 1.32c.2.2.2.53 0 .72m-3.72-.36l2.04 2.04L15.04 22H13v-2.04z"/></svg>';
 
     // Append the label, input, and button to the note wrapper
     noteWrapper.appendChild(noteLabel);
@@ -50,12 +51,12 @@ const html = (()=>{
     const decrementButton = document.createElement('button');
     decrementButton.classList.add('spinner-button');
     decrementButton.setAttribute('id', 'decrement');
-    decrementButton.textContent = '-';
+    decrementButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 13c.7 0 1.36.13 2 .35V13c0-2.12-.74-4.07-1.97-5.61l1.42-1.42c-.45-.51-.9-.97-1.41-1.41L17.62 6c-1.55-1.26-3.5-2-5.62-2a9 9 0 0 0 0 18c.59 0 1.16-.06 1.71-.17C13.26 21 13 20.03 13 19c0-3.31 2.69-6 6-6m-6 1h-2V7h2zm2-11H9V1h6zm8 15v2h-8v-2z"/></svg>';
 
     const incrementButton = document.createElement('button');
     incrementButton.classList.add('spinner-button');
     incrementButton.setAttribute('id', 'increment');
-    incrementButton.textContent = '+';
+    incrementButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 3H9V1h6zm-2 16c0 1.03.26 2 .71 2.83c-.55.11-1.12.17-1.71.17a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A8.96 8.96 0 0 1 21 13v.35c-.64-.22-1.3-.35-2-.35c-3.31 0-6 2.69-6 6m0-12h-2v7h2zm7 11v-3h-2v3h-3v2h3v3h2v-3h3v-2z"/></svg>';
 
     // Append the label, input, and buttons to the number input wrapper
     numberInputWrapper.appendChild(clockLabel);
@@ -71,12 +72,12 @@ const html = (()=>{
     // Create the start and reset buttons
     const startButton = document.createElement('button');
     startButton.classList.add('start-button');
-    startButton.textContent = 'start';
+    startButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 3H9V1h6zm-2 16c0 1.03.26 2 .71 2.83c-.55.11-1.12.17-1.71.17a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A8.96 8.96 0 0 1 21 13v.35c-.64-.22-1.3-.35-2-.35c-3.31 0-6 2.69-6 6m0-12h-2v7h2zm4 9v6l5-3z"/></svg>';
 
     const resetButton = document.createElement('button');
     resetButton.classList.add('reset-button');
     resetButton.setAttribute('disabled', 'true');
-    resetButton.textContent = 'reset';
+    resetButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 3H9V1h6zm-3 15.5c0 1.27.37 2.44 1 3.44c-.33.06-.66.06-1 .06a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A9.16 9.16 0 0 1 21 12.5a6.5 6.5 0 0 0-9 6M13 7h-2v7h2zm9 11.5v-4l-1.17 1.17A4 4 0 0 0 18 14.5c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.68 0 3.12-1.03 3.71-2.5H20a2.5 2.5 0 1 1-.23-3.27L18 18.5z"/></svg>';
 
     // Append the buttons to the control wrapper
     controlWrapper.appendChild(startButton);
@@ -90,6 +91,7 @@ const html = (()=>{
     // Create the div for reward shop
     const rewardShop = document.createElement('div');
     rewardShop.classList.add('reward-shop');
+    rewardShop.classList.add('content');
 
     // Create the span for the coin amount
     const coinSpan = document.createElement('span');

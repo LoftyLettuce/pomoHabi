@@ -1,5 +1,6 @@
 window.addEventListener('load', async ()=>{
   // html.home();
+
   let [timerBtn, rewardBtn] = [document.querySelector('.navigate-timer'), document.querySelector('.navigate-reward')];
   timerBtn.addEventListener('click', clickHandler)
   rewardBtn.addEventListener('click', clickHandler)

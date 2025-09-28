@@ -18,7 +18,7 @@ const logic = (()=>{
 
     // Get reference to note field
     const noteContainer = document.querySelector('.note-wrapper');
-    
+
     // Event listener for decrement button
     decrementBtn.addEventListener('click', () => {
         let value = parseInt(numberInput.value);
@@ -166,8 +166,14 @@ const logic = (()=>{
         })
         listUI.addEventListener('click', async (e)=>{
           if (e.target.tagName === 'BUTTON'){
-            const name = e.target.querySelector('.name').textContent;
+            const nameUI = e.target.querySelector('.name');
+            nameUI.classList.add('hide');
+            const name = nameUI.textContent;
+            const svg = '<svg class="loading" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8"/></svg>';
+            nameUI.innerHTML += svg;
             await HabiticaAPI.scoreReward(rewards[name].id);
+            nameUI.querySelector('svg').remove();
+            nameUI.classList.remove('hide');
             displayGP();
           }
         })

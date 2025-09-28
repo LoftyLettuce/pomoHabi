@@ -186,6 +186,29 @@ input[type="number"]::-moz-spinner {
   padding: 0.5rem;
   box-sizing: border-box
 }
+.name.hide{
+  color: transparent !important;
+}
+.name{
+  position: relative;
+}
+@keyframes rolling {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 2rem;
+  width: 2rem;
+  color: var(--ctp-mocha-crust);
+  animation: rolling 500ms linear infinite;
+}
 /* effect */
 /* Sweep To Right */
 .hvr-sweep-to-right>.name {
@@ -219,16 +242,16 @@ input[type="number"]::-moz-spinner {
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
-.hvr-sweep-to-right:hover>.name, .hvr-sweep-to-right:focus>.name, .hvr-sweep-to-right:active>.name {
+.hvr-sweep-to-right:hover>.name, .hvr-sweep-to-right:focus>.name{
   color: var(--ctp-mocha-crust);
 }
-.hvr-sweep-to-right:hover>.name:before, .hvr-sweep-to-right:focus>.name:before, .hvr-sweep-to-right:active>.name:before {
+.hvr-sweep-to-right:hover>.name:before, .hvr-sweep-to-right:focus>.name:before{
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
 
 /* important */
-.hide{
+.pomodo-timer .hide{
   /* visibility: hidden; */
   display: none;
 }

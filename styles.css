@@ -1,13 +1,45 @@
 *{
   padding: 0;
   margin: 0;
+  background-color: var(--ctp-mocha-base);
 }
 body{
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
   height: 280px;
   width: 300px;
+  color: var(--ctp-mocha-text);
 }
+svg{
+  background-color: transparent;
+}
+/* login */
+.login{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  column-gap: 1rem;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+}
+.login .console{
+  grid-column: span 2;
+}
+.login label{
+  min-width: max-content;
+  justify-self: end;
+}
+.login input{
+  max-width: 60%;
+  width: auto;
+  justify-self: stretch;
+}
+.login button{
+  grid-column: span 2;
+  justify-self: center;
+}
+
 /* navigate board */
 .navigate-board{
   display: grid;
@@ -47,21 +79,6 @@ body{
   justify-content: center;
   align-items: center;
   margin: 0.3rem;
-}
-.pomodo-timer button{
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-}
-.pomodo-timer button:hover, .pomodo-timer button:focus{
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
 }
 .time{
   font-size: 4rem;
@@ -109,7 +126,7 @@ input[type="number"]::-moz-spinner {
 .control svg{
   color: var(--ctp-mocha-crust);
 }
-.start-button, .reset-button, .note-wrapper button{
+.start-button, .reset-button, .note-wrapper button, .login button{
   flex-grow: 1;
   background-color: var(--ctp-mocha-green);
   border-radius: 10px;
@@ -249,7 +266,21 @@ input[type="number"]::-moz-spinner {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
-
+.pomodo-timer button, .login button{
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.pomodo-timer button:hover, .pomodo-timer button:focus, .login button:hover, .login button:focus{
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
 /* important */
 .pomodo-timer .hide{
   /* visibility: hidden; */

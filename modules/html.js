@@ -1,4 +1,72 @@
 const html = (()=>{
+  function login(){
+    // Create the container div
+    const loginDiv = document.createElement('div');
+    loginDiv.className = 'login';
+
+    // Create the console div
+    const consoleDiv = document.createElement('div');
+    consoleDiv.className = 'console';
+    consoleDiv.textContent = 'Please fill the thing:(';
+    loginDiv.appendChild(consoleDiv);
+
+    // Create the label and input for User ID
+    const userIdLabel = document.createElement('label');
+    userIdLabel.setAttribute('for', 'user-id');
+    userIdLabel.textContent = 'User ID: ';
+    const userIdInput = document.createElement('input');
+    userIdInput.id = 'user-id';
+    userIdInput.type = 'text';
+
+    loginDiv.appendChild(userIdLabel);
+    loginDiv.appendChild(userIdInput);
+
+    // Create the label and input for API Key
+    const apiKeyLabel = document.createElement('label');
+    apiKeyLabel.setAttribute('for', 'api-key');
+    apiKeyLabel.textContent = 'API Key: ';
+    const apiKeyInput = document.createElement('input');
+    apiKeyInput.id = 'api-key';
+    apiKeyInput.type = 'text';
+
+    loginDiv.appendChild(apiKeyLabel);
+    loginDiv.appendChild(apiKeyInput);
+
+    // Create the button with the SVG icon
+    const button = document.createElement('button');
+    button.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M15 9H5V5h10m-3 14a3 3 0 0 1-3-3a3 3 0 0 1 3-3a3 3 0 0 1 3 3a3 3 0 0 1-3 3m5-16H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7z"/>
+      </svg>
+    `;
+
+    loginDiv.appendChild(button);
+
+    // Append everything to the body (or another parent element)
+    document.body.appendChild(loginDiv);
+  }
+  function navigateBar(){
+    // Create the div container
+    const navigateBoard = document.createElement('div');
+    navigateBoard.classList.add('navigate-board');
+
+    // Create the "Timer" button
+    const timerButton = document.createElement('button');
+    timerButton.classList.add('navigate-timer');
+    timerButton.textContent = 'Timer';
+
+    // Create the "Reward" button
+    const rewardButton = document.createElement('button');
+    rewardButton.classList.add('navigate-reward');
+    rewardButton.textContent = 'Reward';
+
+    // Append the buttons to the navigateBoard div
+    navigateBoard.appendChild(timerButton);
+    navigateBoard.appendChild(rewardButton);
+
+    // Append the navigateBoard to the body (or any other container you want)
+    document.body.appendChild(navigateBoard);
+  }
   function home(){
     // Create the main container div
     const pomodoTimer = document.createElement('div');
@@ -109,5 +177,5 @@ const html = (()=>{
     // Finally, append the reward-shop div to the body (or any other parent element)
     document.body.appendChild(rewardShop);
   }
-  return {home, reward};
+  return {login, navigateBar, home, reward};
 })();

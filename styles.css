@@ -43,7 +43,7 @@ svg{
 /* navigate board */
 .navigate-board{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   justify-content: stretch;
 }
 .navigate-board .active{

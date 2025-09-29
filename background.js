@@ -12,7 +12,7 @@ browser.runtime.onMessage.addListener(async (message)=>{
       apiKey = JSON.parse(result.apiKey);
     }
     const HabiticaAPI = ((userAPI, keyAPI)=>{
-      const client = `${userAPI}-Pomodo`;
+      const client = '7a9a0dee-b79b-4596-8a77-99ca5efe983c-Pomodo';
       const getMethod = {
         method: 'GET', 
         mode: 'cors',
@@ -27,9 +27,9 @@ browser.runtime.onMessage.addListener(async (message)=>{
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-user' : '7a9a0dee-b79b-4596-8a77-99ca5efe983c', 
-          'x-api-key' : '9b26b414-1935-4d08-af35-827cfe93bf89',
-          "x-client": '7a9a0dee-b79b-4596-8a77-99ca5efe983c-Pomodo',
+          'x-api-user' : userAPI, 
+          'x-api-key' : keyAPI,
+          "x-client": client,
         },
       }
       async function errorHandling(name, url, method){
@@ -82,7 +82,7 @@ browser.alarms.onAlarm.addListener(async ()=>{
     apiKey = JSON.parse(result.apiKey);
   }
   const HabiticaAPI = ((userAPI, keyAPI)=>{
-    const client = `${userAPI}-Pomodo`;
+    const client = '7a9a0dee-b79b-4596-8a77-99ca5efe983c-Pomodo';
     const getMethod = {
       method: 'GET', 
       mode: 'cors',
@@ -97,9 +97,9 @@ browser.alarms.onAlarm.addListener(async ()=>{
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-user' : '7a9a0dee-b79b-4596-8a77-99ca5efe983c', 
-        'x-api-key' : '9b26b414-1935-4d08-af35-827cfe93bf89',
-        "x-client": '7a9a0dee-b79b-4596-8a77-99ca5efe983c-Pomodo',
+        'x-api-user' : userAPI, 
+        'x-api-key' : keyAPI,
+        "x-client": client,
       },
     }
     async function errorHandling(name, url, method){

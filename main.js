@@ -8,9 +8,17 @@ window.addEventListener('load', async ()=>{
   })
   function startPage(){
     html.navigateBar();
-    let [timerBtn, rewardBtn] = [document.querySelector('.navigate-timer'), document.querySelector('.navigate-reward')];
+    let [timerBtn, rewardBtn, logoutBtn] = [
+      document.querySelector('.navigate-timer'), 
+      document.querySelector('.navigate-reward'), 
+      document.querySelector('.logout')
+    ];
     timerBtn.addEventListener('click', clickHandler);
     rewardBtn.addEventListener('click', clickHandler);
+    logoutBtn.addEventListener('click', ()=>{
+      browser.storage.local.remove(['userID', 'keyAPI']);
+      window.location.reload();
+    })
     timerBtn.click();
     function clickHandler(e){
       const btn = e.target;

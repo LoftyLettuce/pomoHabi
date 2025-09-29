@@ -34,7 +34,6 @@ const logic = (()=>{
           document.querySelector('.console').textContent = `Error: ${response.status} - something wrong with your input:(`;
           return;
         }
-        browser.storage.local.remove('Input');
         browser.storage.local.set({'userID': JSON.stringify(userID), 'apiKey': JSON.stringify(apiKey)});
         window.location.reload();
       } catch (error) {
@@ -181,7 +180,7 @@ const logic = (()=>{
       apiKey = JSON.parse(result.apiKey);
     }
     const HabiticaAPI = ((userAPI, keyAPI)=>{
-      const client = `${userAPI}-Pomodo`;
+      const client = '7a9a0dee-b79b-4596-8a77-99ca5efe983c-Pomodo';
       const getMethod = {
         method: 'GET', 
         mode: 'cors',
@@ -196,9 +195,9 @@ const logic = (()=>{
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-user' : '7a9a0dee-b79b-4596-8a77-99ca5efe983c', 
-          'x-api-key' : '9b26b414-1935-4d08-af35-827cfe93bf89',
-          "x-client": '7a9a0dee-b79b-4596-8a77-99ca5efe983c-Pomodo',
+          'x-api-user' : userAPI, 
+          'x-api-key' : keyAPI,
+          "x-client": client,
         },
       }
       async function errorHandling(name, url, method){

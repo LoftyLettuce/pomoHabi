@@ -60,9 +60,15 @@ const html = (()=>{
     rewardButton.classList.add('navigate-reward');
     rewardButton.textContent = 'Reward';
 
+    // Create the "Logout" button
+    const logoutButton = document.createElement('button');
+    logoutButton.classList.add('logout');
+    logoutButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5M4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4z"/></svg>';
+   
     // Append the buttons to the navigateBoard div
     navigateBoard.appendChild(timerButton);
     navigateBoard.appendChild(rewardButton);
+    navigateBoard.appendChild(logoutButton);
 
     // Append the navigateBoard to the body (or any other container you want)
     document.body.appendChild(navigateBoard);

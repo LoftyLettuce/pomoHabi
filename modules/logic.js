@@ -52,12 +52,18 @@ const logic = (()=>{
       }
       else return;
     })
+    //Check if there is a paused time
+    browser.storage.local.get('PausedAt', (result)=>{
+      if ('PausedAt' in result){
+        document.querySelector('.time').textContent = result.PausedAt;
+        browser.storage.local.remove(['PausedAt']);
+      }
+    })
     // Get references to buttons and input field
     const decrementBtn = document.getElementById('decrement');
     const incrementBtn = document.getElementById('increment');
     const inputContainer = document.querySelector('.number-input-wrapper');
     const numberInput = document.querySelector('.number-input-wrapper input');
-
     // Get reference to note field
     const noteContainer = document.querySelector('.note-wrapper');
 
@@ -89,21 +95,32 @@ const logic = (()=>{
       cleanUp();
     })
 
-    // Add event to start countdown
-    document.querySelector('.start-button').addEventListener('click', startTimer);
+    // Add event to start button
+    const startBtn = document.querySelector('.start-button');
+    const startIcon = startBtn.querySelector('.start-icon');
+    const pauseIcon = startBtn.querySelector('.pause-icon');
+    startBtn.addEventListener('click', startTimer);
     function startTimer(e){
-      e.target.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 16.5h1.88v5H16.5zm3.13 0v5h1.87v-5zM15 1H9v2h6zm6 12.35c-.64-.22-1.3-.35-2-.35c-3.31 0-6 2.69-6 6c0 1.03.26 2 .71 2.83c-.55.11-1.12.17-1.71.17a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A8.96 8.96 0 0 1 21 13zM13 7h-2v7h2z"/></svg>';
-      toggleVisibility(inputContainer, 'off')
+      startBtn.querySelector('.start-icon').classList.remove('hide');
+      startBtn.querySelector('.pause-icon').classList.add('hide');
       // Clean everything from the last countdown
       cleanUp();
+      // show input countdown back
+      displayElement([inputContainer, startIcon]);
       //set countdown
       browser.alarms.clear("countdownTimer", (clear)=>{
+        const cdUIVal = document.querySelector('.time').textContent;
+        // If countdown doesn't exist,start countdown
         if (!clear){
-          const session = formatToMinutes(document.querySelector('.time').textContent);
+          const session = formatToMinutes(cdUIVal);
           const goal = dateFns.addMinutes(new Date(), session);
           browser.storage.local.set({'Time': JSON.stringify(goal)});
           countdown(goal);
           browser.runtime.sendMessage({'time': session});
+        }
+        // Else dont do anything and save the time
+        else{
+          browser.storage.local.set({'PausedAt': cdUIVal});
         }
       })
     };
@@ -115,14 +132,13 @@ const logic = (()=>{
       // Enable note
       const noteInput = document.querySelector('.note-wrapper input');
       const addBtn = document.querySelector('.note-wrapper button');
-      toggleVisibility(noteContainer, 'on');
+      displayElement([noteContainer, pauseIcon]);
       addBtn.addEventListener('click', ()=>{
         browser.runtime.sendMessage({'note': noteInput.value});
         noteInput.value = '';
       })
       // Update time
       const countDownUI = document.querySelector('.time');
-      const startBtn = document.querySelector('.start-button');
       (function updateTime(){
         secondLeft = dateFns.differenceInSeconds(goal, new Date())
         const clock = {
@@ -150,14 +166,24 @@ const logic = (()=>{
       return minutes + Math.round(seconds/60);
     }
     function initClock(){
-      toggleVisibility(noteContainer, 'off');
-      toggleVisibility(inputContainer, 'on');
+      displayElement([inputContainer, startIcon]);
       // Refresh time
       document.querySelector('.time').textContent = `${numberInput.value.padStart(2, '0')}:00`;
     }
     function cleanUp(){
-      browser.storage.local.remove(['Time', 'Session']);
+      browser.storage.local.remove(['Time', 'Session', 'PausedAt']);
       clearTimeout(timer); 
+    }
+    function displayElement(elements){
+      elements.forEach((e)=>{
+        toggleVisibility(e, 'on');
+      })
+      const exclusiveElements = [
+        noteContainer, inputContainer, startIcon, pauseIcon
+      ].filter((e)=>!elements.includes(e));
+      exclusiveElements.forEach((e)=>{
+        toggleVisibility(e, 'off')
+      });
     }
     function toggleVisibility(e, s){
       switch (s){

@@ -82,7 +82,7 @@ const html = (()=>{
     // Create the time display
     const timeDisplay = document.createElement('div');
     timeDisplay.classList.add('time');
-    timeDisplay.textContent = '30:00';  // Default time
+    timeDisplay.textContent = '20:00';  // Default time
     pomodoTimer.appendChild(timeDisplay);
 
     // Create the note wrapper (initially hidden)
@@ -118,7 +118,7 @@ const html = (()=>{
     clockLabel.textContent = 'Minute: ';
     const clockInput = document.createElement('input');
     clockInput.setAttribute('type', 'number');
-    clockInput.setAttribute('value', '30');
+    clockInput.setAttribute('value', '20');
     clockInput.setAttribute('id', 'clock');
 
     // Create the decrement and increment buttons
@@ -145,8 +145,10 @@ const html = (()=>{
 
     // Create the start and reset buttons
     const startButton = document.createElement('button');
+    const startIcon = '<svg class="start-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 3H9V1h6zm-2 16c0 1.03.26 2 .71 2.83c-.55.11-1.12.17-1.71.17a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A8.96 8.96 0 0 1 21 13v.35c-.64-.22-1.3-.35-2-.35c-3.31 0-6 2.69-6 6m0-12h-2v7h2zm4 9v6l5-3z"/></svg>';
+    const pauseIcon = '<svg class="pause-icon hide" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 16.5h1.88v5H16.5zm3.13 0v5h1.87v-5zM15 1H9v2h6zm6 12.35c-.64-.22-1.3-.35-2-.35c-3.31 0-6 2.69-6 6c0 1.03.26 2 .71 2.83c-.55.11-1.12.17-1.71.17a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A8.96 8.96 0 0 1 21 13zM13 7h-2v7h2z"/></svg>';
     startButton.classList.add('start-button');
-    startButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 3H9V1h6zm-2 16c0 1.03.26 2 .71 2.83c-.55.11-1.12.17-1.71.17a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A8.96 8.96 0 0 1 21 13v.35c-.64-.22-1.3-.35-2-.35c-3.31 0-6 2.69-6 6m0-12h-2v7h2zm4 9v6l5-3z"/></svg>';
+    startButton.innerHTML = `${startIcon}${pauseIcon}`;
 
     const resetButton = document.createElement('button');
     resetButton.classList.add('reset-button');
